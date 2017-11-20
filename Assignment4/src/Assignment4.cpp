@@ -68,14 +68,16 @@ inline void runPhoneBook()
 			string lastName;
 			string phone;
 			inputFile.open(fileName);
-			while(inputFile >> firstName)
+			while(inputFile.is_open())
 			{
+				inputFile >> firstName
 				inputFile >> lastName;
 				inputFile >> phone;
 
 				Person person(firstName, lastName, phone);
 				persons.insert(person);
 			}
+			inputFile.close();
 
 		}
 		else if(input == "S")
