@@ -9,6 +9,7 @@
 #include <iostream>
 #include "BinarySearchTree.h"
 #include "Person.h"
+#include <fstream>
 using namespace std;
 
 void printIntro();
@@ -62,7 +63,19 @@ inline void runPhoneBook()
 			cout << "Enter file name: ";
 			cin >> fileName;
 
-			//Load file into BinarySearchTree
+			ifstream inputFile;
+			string firstName;
+			string lastName;
+			string phone;
+			inputFile.open(fileName);
+			while(inputFile >> firstName)
+			{
+				inputFile >> lastName;
+				inputFile >> phone;
+
+				Person person(firstName, lastName, phone);
+				persons.insert(person);
+			}
 
 		}
 		else if(input == "S")
