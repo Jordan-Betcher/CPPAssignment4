@@ -9,7 +9,18 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+void printIntro();
+
+int main()
+{
+	printIntro();
+
+
 	return 0;
+}
+
+inline void printIntro()
+{
+	cout << "***MY	PHONEBOOK	APPLICATION***" << endl;
+	cout << "Please	choose	an	operation:" << endl;
 }
