@@ -25,8 +25,8 @@ int main()
 
 inline void printIntro()
 {
-	cout << "***MY	PHONEBOOK	APPLICATION***" << endl;
-	cout << "Please	choose	an	operation:" << endl;
+	cout << "***MY PHONEBOOK APPLICATION***" << endl;
+	cout << "Please choose an operation:" << endl;
 }
 
 inline void runPhoneBook()
