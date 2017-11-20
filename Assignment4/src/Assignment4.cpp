@@ -33,29 +33,56 @@ inline void runPhoneBook()
 	while (running)
 	{
 		string input;
-		cout
-		        << "A(Add) | L(Load) | S(Search) | P(Print) | F(Filter) | Q(Quit): ";
+		cout << "A(Add) | L(Load) | S(Search) | P(Print) | F(Filter) | Q(Quit): ";
 		cin >> input;
 
 		if(input == "A")
 		{
+			string firstName;
+			string lastName;
+			string phoneNumber;
+
+			cout << "Enter name: " << endl;
+			cin >> firstName;
+			cin >> lastName;
+
+			cout << "Enter phone: " << endl;
+			cin >> phoneNumber;
+
+			//Add name to BinarySearchTree
 
 		}
 		else if(input == "L")
 		{
+			string fileName;
+
+			cout << "Enter file name: " << endl;
+			cin >> fileName;
+
+			//Load file into BinarySearchTree
 
 		}
 		else if(input == "S")
 		{
+			string firstName;
+			string lastName;
+			string phoneNumber;
+
+			cout << "Enter name: " << endl;
+			cin >> firstName;
+			cin >> lastName;
+
+			//Print phone of person
 
 		}
 		else if(input == "P")
 		{
-
+			//Print BinarySearchTree
+			//Print how many
 		}
 		else if(input == "F")
 		{
-
+			//??
 		}
 		else if(input == "Q")
 		{
