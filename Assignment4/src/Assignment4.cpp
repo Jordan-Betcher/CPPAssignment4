@@ -106,7 +106,7 @@ inline void runPhoneBook()
 		}
 		else
 		{
-
+			cout << "Could not understand your operation, please try again." << endl;
 		}
 	}
 
