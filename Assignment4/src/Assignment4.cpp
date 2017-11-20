@@ -7,7 +7,6 @@
 //============================================================================
 
 #include <iostream>
-#include "Person.h"
 #include "BinarySearchTree.h"
 using namespace std;
 
@@ -30,7 +29,7 @@ inline void printIntro()
 
 inline void runPhoneBook()
 {
-	BinarySearchTree<Person> persons;
+	BinarySearchTree<string> persons;
 
 	bool running = true;
 
@@ -42,24 +41,24 @@ inline void runPhoneBook()
 
 		if(input == "A")
 		{
-			string name;
+			string firstName, lastName;
 			string phone;
 
-			cout << "Enter name: " << endl;
-			getline(cin, name);
+			cout << "Enter name: ";
+			cin >> firstName;
+			cin >> lastName;
 
-			cout << "Enter phone: " << endl;
+			cout << "Enter phone: ";
 			cin >> phone;
 
-			Person person(name, phone);
-
-			persons.insert(person);
+			string temp = firstName + " " + lastName + " " + phone;
+			persons.insert(temp);
 		}
 		else if(input == "L")
 		{
 			string fileName;
 
-			cout << "Enter file name: " << endl;
+			cout << "Enter file name: ";
 			cin >> fileName;
 
 			//Load file into BinarySearchTree
@@ -67,15 +66,14 @@ inline void runPhoneBook()
 		}
 		else if(input == "S")
 		{
-			string firstName;
-			string lastName;
+			string name;
 			string phoneNumber;
 
-			cout << "Enter name: " << endl;
-			cin >> firstName;
-			cin >> lastName;
+			cout << "Enter name: ";
+			getline(cin, name);
 
 			//Print phone of person
+
 
 		}
 		else if(input == "P")
