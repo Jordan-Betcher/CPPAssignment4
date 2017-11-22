@@ -30,7 +30,8 @@ private:
 	int treeNodeCount(node<T>*);
 	int treeLeaveCount(node<T>*);
 	void treeInsert(node<T>*&, T&);
-	bool treeSearch(node<T>*, T&);
+	bool treeContains(node<T>*, T&);
+	T treeSearch(node<T>*, T&);
 	node<T>* findMax(node<T>*);
 	void deletenode(node<T>*&, T&);
 
@@ -43,7 +44,8 @@ public:
 	int nodeCount(){return treeNodeCount(root);}
 	int leaveCount(){return treeLeaveCount(root);}
 	void insert(T& item){treeInsert(root, item);}
-	bool search(T& item){return treeSearch(root,item);}
+	bool contains(T& item){return treeContains(root,item);}
+	T search(T& item){return treeSearch(root,item);}
 //	void insert(T&); //non-recursive function call
 	node<T>* findMax(){return findMax(root);}
 	void deletenode(T& item){deletenode(root, item);}
@@ -185,14 +187,24 @@ void BinarySearchTree<T>::treeInsert(node<T>*& p, T& item){
 }
 
 template <class T>
-bool BinarySearchTree<T>::treeSearch(node<T>* p, T& item){
+bool BinarySearchTree<T>::treeContains(node<T>* p, T& item){
 	if(p == NULL)
 		return false;
 	else if(item<p->data)
+		return treeContains(p->left, item);
+	else if(item>p->data)
+		return treeContains(p->right, item);
+	return true;
+}
+
+template <class T>
+T BinarySearchTree<T>::treeSearch(node<T>* p, T& item){
+
+	if(item<p->data)
 		return treeSearch(p->left, item);
 	else if(item>p->data)
 		return treeSearch(p->right, item);
-	return true;
+	return p->data;
 }
 
 template <class T>
