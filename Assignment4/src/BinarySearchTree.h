@@ -63,7 +63,7 @@ template <class T>
 void BinarySearchTree<T>::inOrderT(node<T>* p){
 	if(p!=NULL){
 		inOrderT(p->left);
-		cout<<p->data;
+		cout<<p->data<<endl;
 		inOrderT(p->right);
 	}
 }
@@ -86,7 +86,7 @@ void BinarySearchTree<T>::inOrderT(node<T>* p){
 template <class T>
 void BinarySearchTree<T>::preOrderT(node<T>* p){
 	if(p!=NULL){
-		cout<<p->data;
+		cout<<p->data<<endl;
 		preOrderT(p->left);
 		preOrderT(p->right);
 	}
@@ -97,7 +97,7 @@ void BinarySearchTree<T>::postOrderT(node<T>* p){
 	if(p!=NULL){
 		postOrderT(p->left);
 		postOrderT(p->right);
-		cout<<p->data;
+		cout<<p->data<<endl;
 	}
 }
 template <class T>

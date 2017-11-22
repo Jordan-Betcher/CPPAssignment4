@@ -102,8 +102,20 @@ inline void runPhoneBook()
 		}
 		else if(input == "P")
 		{
-			//Print BinarySearchTree
-			//Print how many
+			persons.inOrder();
+			int numberOfPersons = persons.nodeCount();
+			if(numberOfPersons == 0)
+			{
+				cout << "No contacts found." << endl;
+			}
+			else if(numberOfPersons == 1)
+			{
+				cout <<  "1" << " contact..." << endl;
+			}
+			else
+			{
+				cout <<  numberOfPersons << " contacts..." << endl;
+			}
 		}
 		else if(input == "F")
 		{
