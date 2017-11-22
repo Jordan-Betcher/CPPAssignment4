@@ -68,5 +68,16 @@ bool operator<(Person& firstPerson, Person& secondPerson)
 //Tells if a passenger lastName is larger (closer to a) than another passengers.
 bool operator>(Person& firstPerson, Person& secondPerson)
 {
-	return ! (firstPerson < secondPerson);
+	if(firstPerson.firstName > secondPerson.firstName)
+	{
+		return true;
+	}
+	else if(firstPerson.firstName == secondPerson.firstName)
+	{
+		return firstPerson.lastName > secondPerson.lastName;
+	}
+	else
+	{
+		return false;
+	}
 }
