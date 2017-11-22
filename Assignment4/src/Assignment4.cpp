@@ -68,7 +68,7 @@ inline void runPhoneBook()
 			string lastName;
 			string phone;
 			inputFile.open(fileName);
-			while(inputFile.is_open())
+			while( ! inputFile.eof())
 			{
 				inputFile >> firstName;
 				inputFile >> lastName;
