@@ -27,7 +27,7 @@ Person::~Person()
 
 std::ostream& operator<<(std::ostream& output, Person& person)
 {
-	output << person.firstName << " " << person.lastName << " :" << person.phone;
+	output << person.firstName << " " << person.lastName << ": " << person.phone;
 	return output;
 }
 

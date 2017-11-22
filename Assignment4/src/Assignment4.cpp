@@ -70,7 +70,7 @@ inline void runPhoneBook()
 			inputFile.open(fileName);
 			while(inputFile.is_open())
 			{
-				inputFile >> firstName
+				inputFile >> firstName;
 				inputFile >> lastName;
 				inputFile >> phone;
 
@@ -90,7 +90,15 @@ inline void runPhoneBook()
 			cin >> lastName;
 
 			Person person(firstName, lastName, "");
-			cout << persons.search(person) << endl;
+			if(persons.contains(person))
+			{
+				Person temp = persons.search(person);
+				cout << temp << endl;
+			}
+			else
+			{
+				cout << "Person not found, please try again." << endl;
+			}
 		}
 		else if(input == "P")
 		{
