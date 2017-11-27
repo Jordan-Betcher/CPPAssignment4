@@ -81,3 +81,18 @@ bool operator>(Person& firstPerson, Person& secondPerson)
 		return false;
 	}
 }
+
+std::string Person::getPhone()
+{
+	return phone;
+}
+
+std::string Person::getFirstName()
+{
+	return firstName;
+}
+
+std::string Person::getLastName()
+{
+	return lastName;
+}

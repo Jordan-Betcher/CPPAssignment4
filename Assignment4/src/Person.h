@@ -19,6 +19,9 @@ class Person
 	public:
 		Person();
 		Person(std::string firstName, std::string lastName, std::string phone);
+		std::string getPhone();
+		std::string getFirstName();
+		std::string getLastName();
 		friend std::ostream& operator<<(std::ostream& output, Person& person);
 		friend bool operator ==(Person& firstPerson, Person& secondPerson);
 		friend bool operator !=(Person& firstPerson, Person& secondPerson);

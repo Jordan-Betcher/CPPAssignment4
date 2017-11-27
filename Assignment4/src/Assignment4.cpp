@@ -10,6 +10,7 @@
 #include "BinarySearchTree.h"
 #include "Person.h"
 #include <fstream>
+#include <vector>
 using namespace std;
 
 void printIntro();
@@ -92,8 +93,8 @@ inline void runPhoneBook()
 			Person person(firstName, lastName, "");
 			if(persons.contains(person))
 			{
-				Person temp = persons.search(person);
-				cout << temp << endl;
+				Person found = persons.search(person);
+				cout << "Phone: " << found.getPhone() << endl;
 			}
 			else
 			{
@@ -102,7 +103,13 @@ inline void runPhoneBook()
 		}
 		else if(input == "P")
 		{
-			persons.inOrder();
+			vector<Person> people = persons.inOrder();
+
+			for(int i = 0; i < people.size(); i++)
+			{
+				cout << people[i] << endl;
+			}
+
 			int numberOfPersons = persons.nodeCount();
 			if(numberOfPersons == 0)
 			{
@@ -119,7 +126,38 @@ inline void runPhoneBook()
 		}
 		else if(input == "F")
 		{
-			//??
+			string firstName, lastName;
+			cout << "Enter name: ";
+			cin >> firstName;
+			cin >> lastName;
+
+			Person person(firstName, lastName, "");
+
+			vector<Person> people = persons.inOrder();
+			if(persons.contains(person))
+			{
+
+				int numberOfPersons = 0;
+				for(numberOfPersons = 0; people[numberOfPersons] != person; numberOfPersons++)
+				{
+					cout << people[numberOfPersons] << endl;
+				}
+
+
+				if(numberOfPersons == 1)
+				{
+					cout <<  "1" << " contact..." << endl;
+				}
+				else
+				{
+					cout <<  numberOfPersons << " contacts..." << endl;
+				}
+
+			}
+			else
+			{
+				cout << "No contacts found." << endl;
+			}
 		}
 		else if(input == "Q")
 		{
