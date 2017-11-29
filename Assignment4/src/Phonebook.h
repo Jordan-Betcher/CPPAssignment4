@@ -17,11 +17,11 @@ class Phonebook
 		BinarySearchTree<Person> persons;
 	public:
 		Phonebook();
-		void add(Person object);
+		void add(Person person);
 		void loadFile(std::string fileName);
-		void search(std::string firstName, std::string lastName);
+		void search(Person person);
 		void print();
-		void filter(std::string firstName, std::string lastName);
+		void filter(Person person);
 		virtual ~Phonebook();
 };
 

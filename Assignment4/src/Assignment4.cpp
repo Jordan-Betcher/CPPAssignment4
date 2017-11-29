@@ -9,7 +9,7 @@
 #include <iostream>
 #include "BinarySearchTree.h"
 #include "Person.h"
-#include <fstream>
+#include "Phonebook.h"
 #include <vector>
 using namespace std;
 
@@ -32,7 +32,7 @@ inline void printIntro()
 
 inline void runPhoneBook()
 {
-	BinarySearchTree<Person> persons;
+	Phonebook phoneBook;
 
 	bool running = true;
 
@@ -55,7 +55,7 @@ inline void runPhoneBook()
 			cin >> phone;
 
 			Person person(firstName, lastName, phone);
-			persons.insert(person);
+			phoneBook.add(person);
 		}
 		else if(input == "L")
 		{
@@ -64,22 +64,7 @@ inline void runPhoneBook()
 			cout << "Enter file name: ";
 			cin >> fileName;
 
-			ifstream inputFile;
-			string firstName;
-			string lastName;
-			string phone;
-			inputFile.open(fileName);
-			while( ! inputFile.eof())
-			{
-				inputFile >> firstName;
-				inputFile >> lastName;
-				inputFile >> phone;
-
-				Person person(firstName, lastName, phone);
-				persons.insert(person);
-			}
-			inputFile.close();
-
+			phoneBook.loadFile(fileName);
 		}
 		else if(input == "S")
 		{
@@ -91,38 +76,11 @@ inline void runPhoneBook()
 			cin >> lastName;
 
 			Person person(firstName, lastName, "");
-			if(persons.contains(person))
-			{
-				Person found = persons.search(person);
-				cout << "Phone: " << found.getPhone() << endl;
-			}
-			else
-			{
-				cout << "Person not found, please try again." << endl;
-			}
+			phoneBook.search(person);
 		}
 		else if(input == "P")
 		{
-			vector<Person> people = persons.inOrder();
-
-			for(int i = 0; i < people.size(); i++)
-			{
-				cout << people[i] << endl;
-			}
-
-			int numberOfPersons = persons.nodeCount();
-			if(numberOfPersons == 0)
-			{
-				cout << "No contacts found." << endl;
-			}
-			else if(numberOfPersons == 1)
-			{
-				cout <<  "1" << " contact..." << endl;
-			}
-			else
-			{
-				cout <<  numberOfPersons << " contacts..." << endl;
-			}
+			phoneBook.print();
 		}
 		else if(input == "F")
 		{
@@ -133,35 +91,12 @@ inline void runPhoneBook()
 
 			Person person(firstName, lastName, "");
 
-			vector<Person> people = persons.inOrder();
-			if(persons.contains(person))
-			{
-
-				int numberOfPersons = 0;
-				for(numberOfPersons = 0; people[numberOfPersons] != person; numberOfPersons++)
-				{
-					cout << people[numberOfPersons] << endl;
-				}
-
-
-				if(numberOfPersons == 1)
-				{
-					cout <<  "1" << " contact..." << endl;
-				}
-				else
-				{
-					cout <<  numberOfPersons << " contacts..." << endl;
-				}
-
-			}
-			else
-			{
-				cout << "No contacts found." << endl;
-			}
+			phoneBook.filter(person);
 		}
 		else if(input == "Q")
 		{
 			cout << "Bye" << endl;
+
 			running = false;
 		}
 		else
