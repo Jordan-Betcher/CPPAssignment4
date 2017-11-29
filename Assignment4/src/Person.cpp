@@ -36,13 +36,6 @@ Person::Person(Person name, std::string phone)
 	this->phone = phone;
 }
 
-std::ostream& operator<<(std::ostream& output, Person& person)
-{
-	output << person.firstName << " " << person.lastName << ": "
-	        << person.phone;
-	return output;
-}
-
 std::string Person::getFirstName()
 {
 	return firstName;
@@ -66,6 +59,14 @@ bool Person::hasPhone()
 void Person::setPhone(std::string phone)
 {
 	this->phone = phone;
+}
+
+
+std::ostream& operator<<(std::ostream& output, Person& person)
+{
+	output << person.firstName << " " << person.lastName << ": "
+	        << person.phone;
+	return output;
 }
 
 //Tells if two passengers match by their first and last name.

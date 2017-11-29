@@ -1,9 +1,10 @@
-/*
- * BinarySearchTree.h
- *
- *  Created on: Oct 30, 2017
- *      Author: fatma.serce
- */
+//============================================================================
+// Name        : Assignment4.cpp
+// Author      : Fatma Serce
+// Modified by : Jordan Betcher
+// Modified    : 11/29/2017
+// Description : Binary Search Tree
+//============================================================================
 
 #ifndef BINARYSEARCHTREE_H_
 #define BINARYSEARCHTREE_H_
@@ -25,71 +26,34 @@ class BinarySearchTree
 {
 	private:
 		node<T>* root;
-		vector<T> inOrderT(node<T>*);
-		vector<T> preOrderT(node<T>*);
-		vector<T> postOrderT(node<T>*);
-		void destroy(node<T>*);
-		int treeHeight(node<T>*);
-		int max(int, int);
-		int treeNodeCount(node<T>*);
-		int treeLeaveCount(node<T>*);
-		void treeInsert(node<T>*&, T&);
-		bool treeContains(node<T>*, T&);
-		T treeSearch(node<T>*, T&);
-		node<T>* findMax(node<T>*);
-		void deletenode(node<T>*&, T&);
+		vector<T> getInOrderByRecursion(node<T>*);
+		vector<T> getPreOrderByRecursion(node<T>*);
+		vector<T> getPostOrderByRecursion(node<T>*);
+		int getHeightByRecursion(node<T>*);
+		int getMaxNumber(int, int);
+		int getNodeCountByRecursion(node<T>*);
+		int getLeaveCountByRecursion(node<T>*);
+		void insertByRecursion(node<T>*&, T&);
+		bool containsByRecursion(node<T>*, T&);
+		T searchByRecursion(node<T>*, T&);
+		node<T>* getMaxNodeByRecursion(node<T>*);
+		void deleteNodeByRecursion(node<T>*&, T&);
+		void destroyNodeByRecursion(node<T>*);
 
 	public:
 		BinarySearchTree();
-		vector<T> inOrder()
-		{
-			return inOrderT(root);
-		}
-		vector<T> preOrder()
-		{
-			return preOrderT(root);
-		}
-		vector<T> postOrder()
-		{
-			return postOrderT(root);
-		}
-		int height()
-		{
-			return treeHeight(root);
-		}
-		int nodeCount()
-		{
-			return treeNodeCount(root);
-		}
-		int leaveCount()
-		{
-			return treeLeaveCount(root);
-		}
-		void insert(T& item)
-		{
-			treeInsert(root, item);
-		}
-		bool contains(T& item)
-		{
-			return treeContains(root, item);
-		}
-		T search(T& item)
-		{
-			return treeSearch(root, item);
-		}
-		node<T>* findMax()
-		{
-			return findMax(root);
-		}
-		void deletenode(T& item)
-		{
-			deletenode(root, item);
-		}
-		~BinarySearchTree()
-		{
-			destroy(root);
-		}
-
+		vector<T> inOrder();
+		vector<T> preOrder();
+		vector<T> postOrder();
+		int height();
+		int nodeCount();
+		int leaveCount();
+		void insert(T& item);
+		bool contains(T& item);
+		T search(T& item);
+		node<T>* findMax();
+		void deletenode(T& item);
+		~BinarySearchTree();
 };
 
 template<class T>
@@ -99,25 +63,37 @@ BinarySearchTree<T>::BinarySearchTree()
 }
 
 template<class T>
-vector<T> BinarySearchTree<T>::inOrderT(node<T>* p)
+inline vector<T> BinarySearchTree<T>::inOrder()
+{
+		return getInOrderByRecursion(root);
+}
+
+template<class T>
+vector<T> BinarySearchTree<T>::getInOrderByRecursion(node<T>* p)
 {
 	vector<T> inOrderVector;
 
 	if (p != NULL)
 	{
-		vector<T> left = inOrderT(p->left);
+		vector<T> left = getInOrderByRecursion(p->left);
 		inOrderVector.insert(inOrderVector.end(), left.begin(), left.end());
 
 		inOrderVector.push_back(p->data);
 
-		vector<T> right = inOrderT(p->right);
+		vector<T> right = getInOrderByRecursion(p->right);
 		inOrderVector.insert(inOrderVector.end(), right.begin(), right.end());
 	}
 	return inOrderVector;
 }
 
 template<class T>
-vector<T> BinarySearchTree<T>::preOrderT(node<T>* p)
+inline vector<T> BinarySearchTree<T>::preOrder()
+{
+		return getPreOrderByRecursion(root);
+}
+
+template<class T>
+vector<T> BinarySearchTree<T>::getPreOrderByRecursion(node<T>* p)
 {
 	vector<T> preOrderVector;
 
@@ -125,10 +101,10 @@ vector<T> BinarySearchTree<T>::preOrderT(node<T>* p)
 	{
 		preOrderVector.push_back(p->data);
 
-		vector<T> left = inOrderT(p->left);
+		vector<T> left = getPreOrderByRecursion(p->left);
 		preOrderVector.insert(preOrderVector.end(), left.begin(), left.end());
 
-		vector<T> right = inOrderT(p->right);
+		vector<T> right = getPreOrderByRecursion(p->right);
 		preOrderVector.insert(preOrderVector.end(), right.begin(), right.end());
 	}
 
@@ -136,97 +112,92 @@ vector<T> BinarySearchTree<T>::preOrderT(node<T>* p)
 }
 
 template<class T>
-vector<T> BinarySearchTree<T>::postOrderT(node<T>* p)
+inline vector<T> BinarySearchTree<T>::postOrder()
+{
+		return getPostOrderByRecursion(root);
+}
+
+template<class T>
+vector<T> BinarySearchTree<T>::getPostOrderByRecursion(node<T>* p)
 {
 	vector<T> postOrderVector;
 
 	if (p != NULL)
 	{
-		vector<T> left = inOrderT(p->left);
+		vector<T> left = getPostOrderByRecursion(p->left);
 		postOrderVector.insert(postOrderVector.end(), left.begin(), left.end());
 
-		vector<T> right = inOrderT(p->right);
-		postOrderVector.insert(postOrderVector.end(), right.begin(), right.end());
+		vector<T> right = getPostOrderByRecursion(p->right);
+		postOrderVector.insert(postOrderVector.end(), right.begin(),
+		        right.end());
 
 		postOrderVector.push_back(p->data);
 	}
 
 	return postOrderVector;
 }
+
 template<class T>
-int BinarySearchTree<T>::max(int x, int y)
+inline int BinarySearchTree<T>::height()
 {
-	if (x > y) return x;
-	return y;
+		return getHeightByRecursion(root);
 }
 
 template<class T>
-int BinarySearchTree<T>::treeHeight(node<T>* p)
+int BinarySearchTree<T>::getHeightByRecursion(node<T>* p)
 {
 	if (p != NULL)
 	{
-		return 1 + max(height(p->left, p->right));
+		return 1 + getMaxNumber(getHeightByRecursion(p->left), getHeightByRecursion(p->right));
 	}
 	return 0;
 }
 
 template<class T>
-int BinarySearchTree<T>::treeNodeCount(node<T>* p)
+inline int BinarySearchTree<T>::nodeCount()
 {
-	if (p == NULL) return 0;
-	else return 1 + treeNodeCount(p->left) + treeNodeCount(p->right);
+		return getNodeCountByRecursion(root);
 }
+
 template<class T>
-int BinarySearchTree<T>::treeLeaveCount(node<T>* p)
+int BinarySearchTree<T>::getNodeCountByRecursion(node<T>* p)
 {
-	if (p == NULL) return 0;
-	else if (p->left == NULL && p->right == NULL) return 1;
-	else return treeLeaveCount(p->left) + treeLeaveCount(p->right);
-}
-template<class T>
-void BinarySearchTree<T>::destroy(node<T>* p)
-{
-	if (p != NULL)
-	{
-		destroy(p->left);
-		destroy(p->right);
-		delete p;
-		p = NULL;
+	if (p == NULL){
+		return 0;
+	}
+	else{
+		return 1 + getNodeCountByRecursion(p->left) + getNodeCountByRecursion(p->right);
 	}
 }
-//non recursive insert function
-//template <class T>
-//void BinarySearchTree<T>::insert(T& item){
-//	node<T>* newnode = new node<T>();
-//	newnode->data = item;
-//	newnode->left = newnode->right = NULL;
-//	if(root == NULL){
-//		root = newnode;
-//	}
-//	else{
-//		node<T>* p = root;
-//		node<T>* q;
-//		while(p!=NULL){
-//			q = p;
-//			if(item==p->data){
-//				cout<<p->data;
-//				cout<<"error"<<endl;
-//				return;
-//			}
-//			else if (item<p->data)
-//				p = p->left;
-//			else
-//				p = p->right;
-//		}
-//		if(item<q->data)
-//			q->left = newnode;
-//		else
-//			q->right = newnode;
-//	}
-//
-//}
+
 template<class T>
-void BinarySearchTree<T>::treeInsert(node<T>*& p, T& item)
+inline int BinarySearchTree<T>::leaveCount()
+{
+		return getLeaveCountByRecursion(root);
+}
+
+template<class T>
+int BinarySearchTree<T>::getLeaveCountByRecursion(node<T>* p)
+{
+	if (p == NULL) {
+		return 0;
+	}
+	else if (p->left == NULL && p->right == NULL){
+		return 1;
+	}
+	else {
+		return getLeaveCountByRecursion(p->left) + getLeaveCountByRecursion(p->right);
+	}
+}
+
+template<class T>
+inline void BinarySearchTree<T>::insert(T& item)
+{
+		insertByRecursion(root, item);
+}
+
+template<class T>
+void BinarySearchTree<T>::insertByRecursion(node<T>*& p, T& item)
 {
 	if (p == NULL)
 	{
@@ -236,67 +207,161 @@ void BinarySearchTree<T>::treeInsert(node<T>*& p, T& item)
 	}
 	else if (item < p->data)
 	{
-		treeInsert(p->left, item);
+		insertByRecursion(p->left, item);
 	}
 	else
 	{
-		treeInsert(p->right, item);
+		insertByRecursion(p->right, item);
+	}
+}
+
+template<class T>
+inline bool BinarySearchTree<T>::contains(T& item)
+{
+		return containsByRecursion(root, item);
+}
+
+template<class T>
+bool BinarySearchTree<T>::containsByRecursion(node<T>* p, T& item)
+{
+	if (p == NULL)
+	{
+		return false;
+	}
+	else if (item == p->data)
+	{
+		return true;
+	}
+	else if (item < p->data)
+	{
+		return containsByRecursion(p->left, item);
+	}
+	else if (item > p->data)
+	{
+		return containsByRecursion(p->right, item);
+	}
+	else
+	{
+		return true;
+	}
+}
+
+template<class T>
+inline T BinarySearchTree<T>::search(T& item)
+{
+		return searchByRecursion(root, item);
+}
+
+template<class T>
+T BinarySearchTree<T>::searchByRecursion(node<T>* p, T& item)
+{
+	if (item == p->data)
+	{
+		return p->data;
+	}
+	else if (item < p->data)
+	{
+		return searchByRecursion(p->left, item);
+	}
+	else if (item > p->data)
+	{
+		return searchByRecursion(p->right, item);
 	}
 
 }
 
 template<class T>
-bool BinarySearchTree<T>::treeContains(node<T>* p, T& item)
+inline void BinarySearchTree<T>::deletenode(T& item)
 {
-	if (p == NULL) return false;
-	else if (item == p->data) return true;
-	else if (item < p->data) return treeContains(p->left, item);
-	else if (item > p->data) return treeContains(p->right, item);
-	return true;
+		return deleteNodeByRecursion(root, item);
 }
 
 template<class T>
-T BinarySearchTree<T>::treeSearch(node<T>* p, T& item)
+void BinarySearchTree<T>::destroyNodeByRecursion(node<T>* p)
 {
-	if (item == p->data) return p->data;
-	else if (item < p->data) return treeSearch(p->left, item);
-	else if (item > p->data) return treeSearch(p->right, item);
-
+	if (p != NULL)
+	{
+		destroyNodeByRecursion(p->left);
+		destroyNodeByRecursion(p->right);
+		delete p;
+		p = NULL;
+	}
 }
 
 template<class T>
-node<T>* BinarySearchTree<T>::findMax(node<T>* p)
+inline node<T>* BinarySearchTree<T>::findMax()
 {
-	if (p == NULL) return NULL;
-	else if (p->right == NULL) return p;
-	else return findMax(p->right);
+		getMaxNodeByRecursion(root);
 }
 
 template<class T>
-void BinarySearchTree<T>::deletenode(node<T>*& p, T& item)
+int BinarySearchTree<T>::getMaxNumber(int x, int y)
 {
-	//item not found, do nothing
-	if (p == NULL) return;
-	else if (item < p->data)	//item is on the left subtree
-	deletenode(p->left, item);
-	else if (item > p->data)	//item is on the right subtree
-	deletenode(p->right, item);
+	if (x > y) return x;
+	return y;
+}
+
+template<class T>
+node<T>* BinarySearchTree<T>::getMaxNodeByRecursion(node<T>* p)
+{
+	if (p == NULL)
+	{
+		return NULL;
+	}
+	else if (p->right == NULL)
+	{
+		return p;
+	}
 	else
-	{	//item is equal to data,  it is found
+	{
+		return getMaxNodeByRecursion(p->right);
+	}
+}
+
+template<class T>
+void BinarySearchTree<T>::deleteNodeByRecursion(node<T>*& p, T& item)
+{
+	if (p == NULL)
+	{
+		return;
+	}
+	else if (item < p->data)
+	{
+		deleteNodeByRecursion(p->left, item);
+	}
+	else if (item > p->data)
+	{
+		deleteNodeByRecursion(p->right, item);
+	}
+	else
+	{
 		if (p->left != NULL && p->right != NULL)
-		{	//if it is with two children
-			p->data = findMax(p->left)->data;
-			deletenode(p->left, p->data);
+		{
+			p->data = getMaxNodeByRecursion(p->left)->data;
+			deleteNodeByRecursion(p->left, p->data);
 		}
 		else
 		{
 			node<T>* old = p;
-			if (p->left != NULL) p = p->left;
-			else p = p->right;
+
+			if (p->left != NULL)
+			{
+				p = p->left;
+			}
+			else
+			{
+				p = p->right;
+			}
 
 			delete old;
 		}
 	}
+}
+
+template<class T>
+inline BinarySearchTree<T>::~BinarySearchTree()
+{
+		destroyNodeByRecursion(root);
 }
 
 #endif /* BINARYSEARCHTREE_H_ */
