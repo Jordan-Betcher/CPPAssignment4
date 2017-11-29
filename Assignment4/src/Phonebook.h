@@ -14,7 +14,7 @@
 class Phonebook
 {
 	private:
-		BinarySearchTree<Person> persons;
+		BinarySearchTree<Person> mPersons;
 		Person getNamePerson();
 		std::string getPhone();
 		Person getPerson();

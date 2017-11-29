@@ -7,95 +7,104 @@
 
 #include "Person.h"
 
+//Creates an empty person
 Person::Person()
 {
-	this->firstName = "";
-	this->lastName = "";
-	this->phone = "";
+	this->mFirstName = "";
+	this->mLastName = "";
+	this->mPhone = "";
 	
 }
 
+//Creates a person with only firstName and lastName
 Person::Person(std::string firstName, std::string lastName)
 {
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->phone = "";
+	this->mFirstName = firstName;
+	this->mLastName = lastName;
+	this->mPhone = "";
 }
 
+//Creates a Person with firstName, lastName, and phone
 Person::Person(std::string firstName, std::string lastName, std::string phone)
 {
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->phone = phone;
+	this->mFirstName = firstName;
+	this->mLastName = lastName;
+	this->mPhone = phone;
 }
 
+//Creates a Person with firstName, lastName, and phone
 Person::Person(Person name, std::string phone)
 {
-	this->firstName = name.firstName;
-	this->lastName = name.lastName;
-	this->phone = phone;
+	this->mFirstName = name.mFirstName;
+	this->mLastName = name.mLastName;
+	this->mPhone = phone;
 }
 
+//Gets the firstName
 std::string Person::getFirstName()
 {
-	return firstName;
+	return mFirstName;
 }
 
+//Gets the lastName
 std::string Person::getLastName()
 {
-	return lastName;
+	return mLastName;
 }
 
+//Gets the phone
 std::string Person::getPhone()
 {
-	return phone;
+	return mPhone;
 }
 
+//Returns whether or not this Person has a phone
 bool Person::hasPhone()
 {
-	return phone != "";
+	return mPhone != "";
 }
 
+//Sets the phone of the Person
 void Person::setPhone(std::string phone)
 {
-	this->phone = phone;
+	this->mPhone = phone;
 }
 
-
+//Allows you to print to output
 std::ostream& operator<<(std::ostream& output, Person& person)
 {
-	output << person.firstName << " " << person.lastName << ": "
-	        << person.phone;
+	output << person.mFirstName << " " << person.mLastName << ": "
+	        << person.mPhone;
 	return output;
 }
 
-//Tells if two passengers match by their first and last name.
+//Tells if two Persons match by their first and last name.
 bool operator==(Person& firstPerson, Person& secondPerson)
 {
-	bool firstNameMatch = (firstPerson.firstName == secondPerson.firstName);
-	bool lastNameMatch = (firstPerson.lastName == secondPerson.lastName);
+	bool firstNameMatch = (firstPerson.mFirstName == secondPerson.mFirstName);
+	bool lastNameMatch = (firstPerson.mLastName == secondPerson.mLastName);
 	bool sameName = (firstNameMatch && lastNameMatch);
 	return sameName;
 }
 
-//Tells if two passengers don't match by their first and last name.
+//Tells if two Persons don't match by their first and last name.
 bool operator!=(Person& firstPerson, Person& secondPerson)
 {
 	bool samePerson = (firstPerson == secondPerson);
 	return (!samePerson);
 }
 
-//Tells if a passenger lastName is smaller (closer to a) than another passengers.
+//Tells if a Person is smaller than another, for sorting purposes.
 bool operator<(Person& firstPerson, Person& secondPerson)
 {
 
-	if (firstPerson.firstName < secondPerson.firstName)
+	if (firstPerson.mFirstName < secondPerson.mFirstName)
 	{
 		return true;
 	}
-	else if (firstPerson.firstName == secondPerson.firstName)
+	else if (firstPerson.mFirstName == secondPerson.mFirstName)
 	{
-		return firstPerson.lastName < secondPerson.lastName;
+		return firstPerson.mLastName < secondPerson.mLastName;
 	}
 	else
 	{
@@ -103,16 +112,16 @@ bool operator<(Person& firstPerson, Person& secondPerson)
 	}
 }
 
-//Tells if a passenger lastName is larger (closer to a) than another passengers.
+//Tells if a Person is larger than another, for sorting purposes.
 bool operator>(Person& firstPerson, Person& secondPerson)
 {
-	if (firstPerson.firstName > secondPerson.firstName)
+	if (firstPerson.mFirstName > secondPerson.mFirstName)
 	{
 		return true;
 	}
-	else if (firstPerson.firstName == secondPerson.firstName)
+	else if (firstPerson.mFirstName == secondPerson.mFirstName)
 	{
-		return firstPerson.lastName > secondPerson.lastName;
+		return firstPerson.mLastName > secondPerson.mLastName;
 	}
 	else
 	{
@@ -120,9 +129,10 @@ bool operator>(Person& firstPerson, Person& secondPerson)
 	}
 }
 
+//Deletes the Person
 Person::~Person()
 {
-	this->firstName = "";
-	this->lastName = "";
-	this->phone = "";
+	this->mFirstName = "";
+	this->mLastName = "";
+	this->mPhone = "";
 }

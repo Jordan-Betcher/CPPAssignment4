@@ -13,9 +13,9 @@
 class Person
 {
 	private:
-		std::string firstName;
-		std::string lastName;
-		std::string phone;
+		std::string mFirstName;
+		std::string mLastName;
+		std::string mPhone;
 	public:
 		Person();
 		Person(std::string firstName, std::string lastName);

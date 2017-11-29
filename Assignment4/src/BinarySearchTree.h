@@ -17,8 +17,8 @@ template<class T>
 struct node
 {
 		T data;
-		node<T>* left;
-		node<T>* right;
+		node<T>* mpLeft;
+		node<T>* mpRight;
 };
 
 template<class T>
@@ -42,32 +42,35 @@ class BinarySearchTree
 
 	public:
 		BinarySearchTree();
-		vector<T> inOrder();
-		vector<T> preOrder();
-		vector<T> postOrder();
-		int height();
-		int nodeCount();
-		int leaveCount();
+		vector<T> getInOrder();
+		vector<T> getPreOrder();
+		vector<T> getPostOrder();
+		int getHeight();
+		int getNodeCount();
+		int getLeaveCount();
 		void insert(T& item);
 		bool contains(T& item);
 		T search(T& item);
-		node<T>* findMax();
-		void deletenode(T& item);
+		node<T>* findMaxNode();
+		void deleteNode(T& item);
 		~BinarySearchTree();
 };
 
+//Create an empty Binary Search Tree
 template<class T>
 BinarySearchTree<T>::BinarySearchTree()
 {
 	root = NULL;
 }
 
+//Returns the Binary Search Tree as a Vector, inOrder
 template<class T>
-inline vector<T> BinarySearchTree<T>::inOrder()
+inline vector<T> BinarySearchTree<T>::getInOrder()
 {
 		return getInOrderByRecursion(root);
 }
 
+//Returns the Binary Search Tree as a Vector, inOrder, does so by using recursion
 template<class T>
 vector<T> BinarySearchTree<T>::getInOrderByRecursion(node<T>* p)
 {
@@ -75,23 +78,25 @@ vector<T> BinarySearchTree<T>::getInOrderByRecursion(node<T>* p)
 
 	if (p != NULL)
 	{
-		vector<T> left = getInOrderByRecursion(p->left);
+		vector<T> left = getInOrderByRecursion(p->mpLeft);
 		inOrderVector.insert(inOrderVector.end(), left.begin(), left.end());
 
 		inOrderVector.push_back(p->data);
 
-		vector<T> right = getInOrderByRecursion(p->right);
+		vector<T> right = getInOrderByRecursion(p->mpRight);
 		inOrderVector.insert(inOrderVector.end(), right.begin(), right.end());
 	}
 	return inOrderVector;
 }
 
+//Returns the Binary Search Tree as a Vector, preOrder
 template<class T>
-inline vector<T> BinarySearchTree<T>::preOrder()
+inline vector<T> BinarySearchTree<T>::getPreOrder()
 {
 		return getPreOrderByRecursion(root);
 }
 
+//Returns the Binary Search Tree as a Vector, preOrder, does so by using recursion
 template<class T>
 vector<T> BinarySearchTree<T>::getPreOrderByRecursion(node<T>* p)
 {
@@ -101,22 +106,24 @@ vector<T> BinarySearchTree<T>::getPreOrderByRecursion(node<T>* p)
 	{
 		preOrderVector.push_back(p->data);
 
-		vector<T> left = getPreOrderByRecursion(p->left);
+		vector<T> left = getPreOrderByRecursion(p->mpLeft);
 		preOrderVector.insert(preOrderVector.end(), left.begin(), left.end());
 
-		vector<T> right = getPreOrderByRecursion(p->right);
+		vector<T> right = getPreOrderByRecursion(p->mpRight);
 		preOrderVector.insert(preOrderVector.end(), right.begin(), right.end());
 	}
 
 	return preOrderVector;
 }
 
+//Returns the Binary Search Tree as a Vector, postOrder
 template<class T>
-inline vector<T> BinarySearchTree<T>::postOrder()
+inline vector<T> BinarySearchTree<T>::getPostOrder()
 {
 		return getPostOrderByRecursion(root);
 }
 
+//Returns the Binary Search Tree as a Vector, postOrder, does so by using recursion
 template<class T>
 vector<T> BinarySearchTree<T>::getPostOrderByRecursion(node<T>* p)
 {
@@ -124,10 +131,10 @@ vector<T> BinarySearchTree<T>::getPostOrderByRecursion(node<T>* p)
 
 	if (p != NULL)
 	{
-		vector<T> left = getPostOrderByRecursion(p->left);
+		vector<T> left = getPostOrderByRecursion(p->mpLeft);
 		postOrderVector.insert(postOrderVector.end(), left.begin(), left.end());
 
-		vector<T> right = getPostOrderByRecursion(p->right);
+		vector<T> right = getPostOrderByRecursion(p->mpRight);
 		postOrderVector.insert(postOrderVector.end(), right.begin(),
 		        right.end());
 
@@ -137,28 +144,32 @@ vector<T> BinarySearchTree<T>::getPostOrderByRecursion(node<T>* p)
 	return postOrderVector;
 }
 
+//Returns the height
 template<class T>
-inline int BinarySearchTree<T>::height()
+inline int BinarySearchTree<T>::getHeight()
 {
 		return getHeightByRecursion(root);
 }
 
+//Returns the height calculated using recursion
 template<class T>
 int BinarySearchTree<T>::getHeightByRecursion(node<T>* p)
 {
 	if (p != NULL)
 	{
-		return 1 + getMaxNumber(getHeightByRecursion(p->left), getHeightByRecursion(p->right));
+		return 1 + getMaxNumber(getHeightByRecursion(p->mpLeft), getHeightByRecursion(p->mpRight));
 	}
 	return 0;
 }
 
+//Returns node count
 template<class T>
-inline int BinarySearchTree<T>::nodeCount()
+inline int BinarySearchTree<T>::getNodeCount()
 {
 		return getNodeCountByRecursion(root);
 }
 
+//Returns node count using Recursion
 template<class T>
 int BinarySearchTree<T>::getNodeCountByRecursion(node<T>* p)
 {
@@ -166,36 +177,40 @@ int BinarySearchTree<T>::getNodeCountByRecursion(node<T>* p)
 		return 0;
 	}
 	else{
-		return 1 + getNodeCountByRecursion(p->left) + getNodeCountByRecursion(p->right);
+		return 1 + getNodeCountByRecursion(p->mpLeft) + getNodeCountByRecursion(p->mpRight);
 	}
 }
 
+//Returns leave count
 template<class T>
-inline int BinarySearchTree<T>::leaveCount()
+inline int BinarySearchTree<T>::getLeaveCount()
 {
 		return getLeaveCountByRecursion(root);
 }
 
+//Returns leave count using recursion
 template<class T>
 int BinarySearchTree<T>::getLeaveCountByRecursion(node<T>* p)
 {
 	if (p == NULL) {
 		return 0;
 	}
-	else if (p->left == NULL && p->right == NULL){
+	else if (p->mpLeft == NULL && p->mpRight == NULL){
 		return 1;
 	}
 	else {
-		return getLeaveCountByRecursion(p->left) + getLeaveCountByRecursion(p->right);
+		return getLeaveCountByRecursion(p->mpLeft) + getLeaveCountByRecursion(p->mpRight);
 	}
 }
 
+//inserts into tree
 template<class T>
 inline void BinarySearchTree<T>::insert(T& item)
 {
 		insertByRecursion(root, item);
 }
 
+//inserts into tree using recursion
 template<class T>
 void BinarySearchTree<T>::insertByRecursion(node<T>*& p, T& item)
 {
@@ -203,24 +218,26 @@ void BinarySearchTree<T>::insertByRecursion(node<T>*& p, T& item)
 	{
 		p = new node<T>;
 		p->data = item;
-		p->left = p->right = NULL;
+		p->mpLeft = p->mpRight = NULL;
 	}
 	else if (item < p->data)
 	{
-		insertByRecursion(p->left, item);
+		insertByRecursion(p->mpLeft, item);
 	}
 	else
 	{
-		insertByRecursion(p->right, item);
+		insertByRecursion(p->mpRight, item);
 	}
 }
 
+//Returns whether or not the tree contains the item
 template<class T>
 inline bool BinarySearchTree<T>::contains(T& item)
 {
 		return containsByRecursion(root, item);
 }
 
+//Returns whether or not the tree contains the item using recursion
 template<class T>
 bool BinarySearchTree<T>::containsByRecursion(node<T>* p, T& item)
 {
@@ -234,11 +251,11 @@ bool BinarySearchTree<T>::containsByRecursion(node<T>* p, T& item)
 	}
 	else if (item < p->data)
 	{
-		return containsByRecursion(p->left, item);
+		return containsByRecursion(p->mpLeft, item);
 	}
 	else if (item > p->data)
 	{
-		return containsByRecursion(p->right, item);
+		return containsByRecursion(p->mpRight, item);
 	}
 	else
 	{
@@ -246,12 +263,14 @@ bool BinarySearchTree<T>::containsByRecursion(node<T>* p, T& item)
 	}
 }
 
+//Returns the item asked for
 template<class T>
 inline T BinarySearchTree<T>::search(T& item)
 {
 		return searchByRecursion(root, item);
 }
 
+//Returns the item asked for using recursion
 template<class T>
 T BinarySearchTree<T>::searchByRecursion(node<T>* p, T& item)
 {
@@ -261,39 +280,43 @@ T BinarySearchTree<T>::searchByRecursion(node<T>* p, T& item)
 	}
 	else if (item < p->data)
 	{
-		return searchByRecursion(p->left, item);
+		return searchByRecursion(p->mpLeft, item);
 	}
 	else if (item > p->data)
 	{
-		return searchByRecursion(p->right, item);
+		return searchByRecursion(p->mpRight, item);
 	}
 
 }
 
+//Deletes a node
 template<class T>
-inline void BinarySearchTree<T>::deletenode(T& item)
+inline void BinarySearchTree<T>::deleteNode(T& item)
 {
 		return deleteNodeByRecursion(root, item);
 }
 
+//Deletes a node using recursion
 template<class T>
 void BinarySearchTree<T>::destroyNodeByRecursion(node<T>* p)
 {
 	if (p != NULL)
 	{
-		destroyNodeByRecursion(p->left);
-		destroyNodeByRecursion(p->right);
+		destroyNodeByRecursion(p->mpLeft);
+		destroyNodeByRecursion(p->mpRight);
 		delete p;
 		p = NULL;
 	}
 }
 
+//Returns the max node
 template<class T>
-inline node<T>* BinarySearchTree<T>::findMax()
+inline node<T>* BinarySearchTree<T>::findMaxNode()
 {
 		getMaxNodeByRecursion(root);
 }
 
+//Returns the larger number between two number
 template<class T>
 int BinarySearchTree<T>::getMaxNumber(int x, int y)
 {
@@ -301,6 +324,7 @@ int BinarySearchTree<T>::getMaxNumber(int x, int y)
 	return y;
 }
 
+//Returns the max node by recursion
 template<class T>
 node<T>* BinarySearchTree<T>::getMaxNodeByRecursion(node<T>* p)
 {
@@ -308,16 +332,17 @@ node<T>* BinarySearchTree<T>::getMaxNodeByRecursion(node<T>* p)
 	{
 		return NULL;
 	}
-	else if (p->right == NULL)
+	else if (p->mpRight == NULL)
 	{
 		return p;
 	}
 	else
 	{
-		return getMaxNodeByRecursion(p->right);
+		return getMaxNodeByRecursion(p->mpRight);
 	}
 }
 
+// Deletes node using recursion
 template<class T>
 void BinarySearchTree<T>::deleteNodeByRecursion(node<T>*& p, T& item)
 {
@@ -327,30 +352,30 @@ void BinarySearchTree<T>::deleteNodeByRecursion(node<T>*& p, T& item)
 	}
 	else if (item < p->data)
 	{
-		deleteNodeByRecursion(p->left, item);
+		deleteNodeByRecursion(p->mpLeft, item);
 	}
 	else if (item > p->data)
 	{
-		deleteNodeByRecursion(p->right, item);
+		deleteNodeByRecursion(p->mpRight, item);
 	}
 	else
 	{
-		if (p->left != NULL && p->right != NULL)
+		if (p->mpLeft != NULL && p->mpRight != NULL)
 		{
-			p->data = getMaxNodeByRecursion(p->left)->data;
-			deleteNodeByRecursion(p->left, p->data);
+			p->data = getMaxNodeByRecursion(p->mpLeft)->data;
+			deleteNodeByRecursion(p->mpLeft, p->data);
 		}
 		else
 		{
 			node<T>* old = p;
 
-			if (p->left != NULL)
+			if (p->mpLeft != NULL)
 			{
-				p = p->left;
+				p = p->mpLeft;
 			}
 			else
 			{
-				p = p->right;
+				p = p->mpRight;
 			}
 
 			delete old;
@@ -358,6 +383,7 @@ void BinarySearchTree<T>::deleteNodeByRecursion(node<T>*& p, T& item)
 	}
 }
 
+//Destroys the nodes
 template<class T>
 inline BinarySearchTree<T>::~BinarySearchTree()
 {
