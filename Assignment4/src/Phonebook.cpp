@@ -23,8 +23,8 @@ void Phonebook::loadFile()
 {
 	string fileName;
 
-			cout << "Enter file name: ";
-			cin >> fileName;
+	cout << "Enter file name: ";
+	cin >> fileName;
 
 	ifstream inputFile;
 	string firstName;
@@ -40,7 +40,6 @@ void Phonebook::loadFile()
 		inputFile >> phone;
 
 		Person person(firstName, lastName, phone);
-
 
 		persons.insert(person);
 	}
@@ -92,8 +91,8 @@ void Phonebook::filter()
 	vector<Person> people = persons.inOrder();
 	if (persons.contains(person))
 	{
-
 		int numberOfPersons = 0;
+
 		for (numberOfPersons = 0; people[numberOfPersons] != person;
 		        numberOfPersons++)
 		{
@@ -116,26 +115,25 @@ void Phonebook::filter()
 	}
 }
 
-
 Person Phonebook::getNamePerson()
 {
 	string firstName, lastName;
 
-		cout << "Enter name: ";
-		cin >> firstName;
-		cin >> lastName;
+	cout << "Enter name: ";
+	cin >> firstName;
+	cin >> lastName;
 
-		Person person(firstName, lastName);
+	Person person(firstName, lastName);
 
-		return person;
+	return person;
 }
 
 std::string Phonebook::getPhone()
 {
 	string phone;
-				cout << "Enter phone: ";
-				cin >> phone;
-				return phone;
+	cout << "Enter phone: ";
+	cin >> phone;
+	return phone;
 }
 
 Person Phonebook::getPerson()
@@ -147,8 +145,6 @@ Person Phonebook::getPerson()
 	return person;
 }
 
-
 Phonebook::~Phonebook()
 {
-	// TODO Auto-generated destructor stub
 }
