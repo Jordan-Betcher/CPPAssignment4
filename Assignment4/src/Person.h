@@ -25,6 +25,7 @@ class Person
 		std::string getLastName();
 		std::string getPhone();
 		bool hasPhone();
+		void setPhone(std::string phone);
 		friend std::ostream& operator<<(std::ostream& output, Person& person);
 		friend bool operator ==(Person& firstPerson, Person& secondPerson);
 		friend bool operator !=(Person& firstPerson, Person& secondPerson);

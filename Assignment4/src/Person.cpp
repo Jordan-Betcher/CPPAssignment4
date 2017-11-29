@@ -63,6 +63,11 @@ bool Person::hasPhone()
 	return phone != "";
 }
 
+void Person::setPhone(std::string phone)
+{
+	this->phone = phone;
+}
+
 //Tells if two passengers match by their first and last name.
 bool operator==(Person& firstPerson, Person& secondPerson)
 {
