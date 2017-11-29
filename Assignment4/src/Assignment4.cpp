@@ -19,9 +19,11 @@ void calculateElapseTime();
 //Main function
 int main()
 {
-	//printIntro();
-	//runPhonebook();
-	calculateElapseTime();
+	printIntro();
+	runPhonebook();
+
+	//calculateElapseTime(); //use this to calculate time of search using BinarySearchTree
+
 	return 0;
 }
 
