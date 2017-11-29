@@ -15,13 +15,16 @@ class Phonebook
 {
 	private:
 		BinarySearchTree<Person> persons;
+		Person getNamePerson();
+		std::string getPhone();
+		Person getPerson();
 	public:
 		Phonebook();
-		void add(Person person);
-		void loadFile(std::string fileName);
-		void search(Person person);
+		void add();
+		void loadFile();
+		void search();
 		void print();
-		void filter(Person person);
+		void filter();
 		virtual ~Phonebook();
 };
 

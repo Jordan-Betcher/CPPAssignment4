@@ -14,12 +14,12 @@
 using namespace std;
 
 void printIntro();
-void runPhoneBook();
+void runPhonebook();
 
 int main()
 {
 	printIntro();
-	runPhoneBook();
+	runPhonebook();
 
 	return 0;
 }
@@ -30,9 +30,9 @@ inline void printIntro()
 	cout << "Please choose an operation:" << endl;
 }
 
-inline void runPhoneBook()
+inline void runPhonebook()
 {
-	Phonebook phoneBook;
+	Phonebook phonebook;
 
 	bool running = true;
 
@@ -44,59 +44,27 @@ inline void runPhoneBook()
 
 		if(input == "A")
 		{
-			string firstName, lastName;
-			string phone;
-
-			cout << "Enter name: ";
-			cin >> firstName;
-			cin >> lastName;
-
-			cout << "Enter phone: ";
-			cin >> phone;
-
-			Person person(firstName, lastName, phone);
-			phoneBook.add(person);
+			phonebook.add();
 		}
 		else if(input == "L")
 		{
-			string fileName;
-
-			cout << "Enter file name: ";
-			cin >> fileName;
-
-			phoneBook.loadFile(fileName);
+			phonebook.loadFile();
 		}
 		else if(input == "S")
 		{
-			string firstName, lastName;
-			string phoneNumber;
-
-			cout << "Enter name: ";
-			cin >> firstName;
-			cin >> lastName;
-
-			Person person(firstName, lastName, "");
-			phoneBook.search(person);
+			phonebook.search();
 		}
 		else if(input == "P")
 		{
-			phoneBook.print();
+			phonebook.print();
 		}
 		else if(input == "F")
 		{
-			string firstName, lastName;
-			cout << "Enter name: ";
-			cin >> firstName;
-			cin >> lastName;
-
-			Person person(firstName, lastName, "");
-
-			phoneBook.filter(person);
+			phonebook.filter();
 		}
 		else if(input == "Q")
 		{
 			cout << "Bye" << endl;
-
 			running = false;
 		}
 		else
@@ -104,6 +72,7 @@ inline void runPhoneBook()
 			cout << "Could not understand your operation, please try again." << endl;
 		}
 	}
+
 
 
 }
