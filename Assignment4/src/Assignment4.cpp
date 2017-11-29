@@ -1,9 +1,8 @@
 //============================================================================
 // Name        : Assignment4.cpp
-// Author      : Jordan
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Author      : Jordan Betcher
+// Date		   : 11/29/2017
+// Description : Runs a phonebook that keeps track of people
 //============================================================================
 
 #include <iostream>
