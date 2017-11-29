@@ -148,3 +148,16 @@ Person Phonebook::getPerson()
 Phonebook::~Phonebook()
 {
 }
+
+void Phonebook::search(Person person)
+{
+		if (persons.contains(person))
+		{
+			Person found = persons.search(person);
+			cout << "Phone: " << found.getPhone() << endl;
+		}
+		else
+		{
+			cout << "Person not found, please try again." << endl;
+		}
+}

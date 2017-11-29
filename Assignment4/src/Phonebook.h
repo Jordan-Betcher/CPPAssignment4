@@ -23,6 +23,7 @@ class Phonebook
 		void add();
 		void loadFile();
 		void search();
+		void search(Person person);
 		void print();
 		void filter();
 		virtual ~Phonebook();
