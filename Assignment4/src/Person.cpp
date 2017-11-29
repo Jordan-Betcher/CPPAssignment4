@@ -9,8 +9,17 @@
 
 Person::Person()
 {
+	this->firstName = "";
+	this->lastName = "";
+	this->phone = "";
 	
+}
 
+Person::Person(std::string firstName, std::string lastName)
+{
+	this->firstName = firstName;
+	this->lastName = lastName;
+	this->phone = "";
 }
 
 Person::Person(std::string firstName, std::string lastName, std::string phone)
@@ -20,15 +29,38 @@ Person::Person(std::string firstName, std::string lastName, std::string phone)
 	this->phone = phone;
 }
 
-Person::~Person()
+Person::Person(Person name, std::string phone)
 {
-	// TODO Auto-generated destructor stub
+	this->firstName = name.firstName;
+	this->lastName = name.lastName;
+	this->phone = phone;
 }
 
 std::ostream& operator<<(std::ostream& output, Person& person)
 {
-	output << person.firstName << " " << person.lastName << ": " << person.phone;
+	output << person.firstName << " " << person.lastName << ": "
+	        << person.phone;
 	return output;
+}
+
+std::string Person::getFirstName()
+{
+	return firstName;
+}
+
+std::string Person::getLastName()
+{
+	return lastName;
+}
+
+std::string Person::getPhone()
+{
+	return phone;
+}
+
+bool Person::hasPhone()
+{
+	return phone != "";
 }
 
 //Tells if two passengers match by their first and last name.
@@ -51,11 +83,11 @@ bool operator!=(Person& firstPerson, Person& secondPerson)
 bool operator<(Person& firstPerson, Person& secondPerson)
 {
 
-	if(firstPerson.firstName < secondPerson.firstName)
+	if (firstPerson.firstName < secondPerson.firstName)
 	{
 		return true;
 	}
-	else if(firstPerson.firstName == secondPerson.firstName)
+	else if (firstPerson.firstName == secondPerson.firstName)
 	{
 		return firstPerson.lastName < secondPerson.lastName;
 	}
@@ -68,11 +100,11 @@ bool operator<(Person& firstPerson, Person& secondPerson)
 //Tells if a passenger lastName is larger (closer to a) than another passengers.
 bool operator>(Person& firstPerson, Person& secondPerson)
 {
-	if(firstPerson.firstName > secondPerson.firstName)
+	if (firstPerson.firstName > secondPerson.firstName)
 	{
 		return true;
 	}
-	else if(firstPerson.firstName == secondPerson.firstName)
+	else if (firstPerson.firstName == secondPerson.firstName)
 	{
 		return firstPerson.lastName > secondPerson.lastName;
 	}
@@ -82,17 +114,9 @@ bool operator>(Person& firstPerson, Person& secondPerson)
 	}
 }
 
-std::string Person::getPhone()
+Person::~Person()
 {
-	return phone;
-}
-
-std::string Person::getFirstName()
-{
-	return firstName;
-}
-
-std::string Person::getLastName()
-{
-	return lastName;
+	this->firstName = "";
+	this->lastName = "";
+	this->phone = "";
 }

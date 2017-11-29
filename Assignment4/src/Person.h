@@ -18,10 +18,13 @@ class Person
 		std::string phone;
 	public:
 		Person();
+		Person(std::string firstName, std::string lastName);
 		Person(std::string firstName, std::string lastName, std::string phone);
-		std::string getPhone();
+		Person(Person name, std::string phone);
 		std::string getFirstName();
 		std::string getLastName();
+		std::string getPhone();
+		bool hasPhone();
 		friend std::ostream& operator<<(std::ostream& output, Person& person);
 		friend bool operator ==(Person& firstPerson, Person& secondPerson);
 		friend bool operator !=(Person& firstPerson, Person& secondPerson);
